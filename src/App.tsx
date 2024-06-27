@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-import { useIsAuthenticated, useMsal } from '@azure/msal-react';
+import { InteractionType } from '@azure/msal-browser';
+import { useMsal, useMsalAuthentication } from '@azure/msal-react';
 import SignInButton from './component/SignInButton';
 import SignOutButton from './component/SignOutButton';
 
@@ -10,7 +11,7 @@ interface User {
 }
 
 function App() {
-  const isAuthenticated = useIsAuthenticated();
+  const isAuthenticated = useMsalAuthentication(InteractionType.Redirect);
   const { accounts } = useMsal();
   // useMsalAuthentication(InteractionType.Redirect);
   const [user, setUser] = useState<User>({});
